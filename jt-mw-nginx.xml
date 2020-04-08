@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+ <objects>
+  <filecontentObject id="nginx-obj-1001">
+   <filepath>/tmp/mybaseline</filepath>
+  </filecontentObject>
+ </objects>
+</root>

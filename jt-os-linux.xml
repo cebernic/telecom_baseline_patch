@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+ <objects>
+  <cmdObject desc="è·å[/etc/passwd]æä»¶æé" id="linux-obj-1006">
+   <cmd><![CDATA[
+			
+				ls -ld /etc/passwd|awk '{print $1}'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·å[/etc/shadow]æä»¶æé" id="linux-obj-1007">
+   <cmd><![CDATA[
+			
+				ls -ld /etc/shadow|awk '{print $1}'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·å[/etc/group]æä»¶æé" id="linux-obj-1008">
+   <cmd><![CDATA[
+			
+				ls -ld /etc/group|awk '{print $1}'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·åtelnetæå¡" id="linux-obj-1014">
+   <cmd><![CDATA[
+			
+				export LANG=en;export LC_ALL=en;/sbin/chkconfig --list |grep telnet
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject id="linux-obj-1015">
+   <cmd><![CDATA[
+			
+				export LANG=en;export LC_ALL=en;systemctl list-units|grep telnet|egrep '(active|activating)'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·å[/var/log/messages]æä»¶æé" id="linux-obj-1018">
+   <cmd><![CDATA[
+			
+				ls -ld /var/log/messages|awk '{print $1}'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·å[/var/log/secure]æä»¶æé" id="linux-obj-1019">
+   <cmd><![CDATA[
+			
+				ls -ld /var/log/secure|awk '{print $1}'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·å[/var/log/maillog]æä»¶æé" id="linux-obj-1020">
+   <cmd><![CDATA[
+			
+				ls -ld /var/log/maillog|awk '{print $1}'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·å[/var/log/cron]æä»¶æé" id="linux-obj-1021">
+   <cmd><![CDATA[
+			
+				ls -ld /var/log/cron|awk '{print $1}'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·å[/var/log/spooler]æä»¶æé" id="linux-obj-1022">
+   <cmd><![CDATA[
+			
+				ls -ld /var/log/spooler|awk '{print $1}'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·å[/var/log/boot.log]æä»¶æé" id="linux-obj-1023">
+   <cmd><![CDATA[
+			
+				ls -ld /var/log/boot.log|awk '{print $1}'
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·åæå¡åè¡¨" id="linux-obj-1024">
+   <cmd><![CDATA[
+			
+				export LANG=en;export LC_ALL=en;/sbin/chkconfig --list
+			
+			]]></cmd>
+  </cmdObject>
+  <cmdObject desc="è·åOSçæ¬" id="linux-obj-1028">
+   <cmd><![CDATA[
+			
+				uname -a
+			
+			]]></cmd>
+  </cmdObject>
+  <codeObject desc="è·åsshæå¡" id="linux-obj-1013">
+   <code><![CDATA[
+							
+				var cmd = "export LANG=en;export LC_ALL=en;/sbin/chkconfig --list |grep sshd";
+                var cmd1 = "export LANG=en;export LC_ALL=en;systemctl list-units|grep sshd|egrep '(active|activating)'"
+				var result = ctx.executeCmd(cmd);
+				var data = "";		       
+				if(result.isSuccess){ 
+                  data = result.msg;
+                  if(ctx.isEmpty(data) || data.indexOf("LC_ALL")>-1){
+                    var result1 = ctx.executeCmd(cmd1);  
+                    if(result1.isSuccess){ 
+                      data = result1.msg;
+                    }
+                  }					   
+				}
+				object.data = data;
+			
+			]]></code>
+  </codeObject>
+  <codeObject id="linux-obj-1030">
+   <code><![CDATA[
+			
+				   var File = java.io.File;
+				   var flag = new File("/.netrc").exists()
+				   if(flag){
+				   		object.data = 'exist';
+				   }else{
+				        object.data = 'noexist';
+				   }
+			
+			]]></code>
+  </codeObject>
+  <codeObject id="linux-obj-1031">
+   <code><![CDATA[
+			
+				   var File = java.io.File;
+				   var flag = new File("/.rhost").exists()
+				   if(flag){
+				   		object.data = 'exist';
+				   }else{
+				        object.data = 'noexist';
+				   }
+			
+			]]></code>
+  </codeObject>
+  <codeObject id="linux-obj-1032">
+   <code><![CDATA[
+			
+				   var File = java.io.File;
+				   var flag = new File("/etc/hosts.equiv").exists()
+				   if(flag){
+				   		object.data = 'exist';
+				   }else{
+				        object.data = 'noexist';
+				   }
+			
+			]]></code>
+  </codeObject>
+  <filecontentObject desc="è·å[/etc/passwd]æä»¶åå®¹" id="linux-obj-1001">
+   <filepath>/etc/passwd</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/pam.d/su]æä»¶åå®¹" id="linux-obj-1002">
+   <filepath>/tmp/mybaseline</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/pam.d/common-password]æä»¶åå®¹" id="linux-obj-1003">
+   <filepath>/etc/pam.d/common-password</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/pam.d/system-auth]æä»¶åå®¹" id="linux-obj-1004">
+   <filepath>/tmp/mybaseline</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/login.defs]æä»¶åå®¹" id="linux-obj-1005">
+   <filepath>/tmp/mybaseline</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/profile]æä»¶åå®¹" id="linux-obj-1009">
+   <filepath>/tmp/mybaseline</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/vsftpd.chroot_list]æä»¶" id="linux-obj-1010">
+   <filepath>/etc/vsftpd.chroot_list</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/vsftpd/chroot_list]æä»¶" id="linux-obj-1011">
+   <filepath>/etc/vsftpd/chroot_list</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/ssh/sshd_config]æä»¶åå®¹" id="linux-obj-1012">
+   <filepath>/tmp/mybaseline</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/syslog.conf]æä»¶åå®¹" id="linux-obj-1016">
+   <filepath>/tmp/mybaseline</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/rsyslog.conf]æä»¶åå®¹" id="linux-obj-1017">
+   <filepath>/tmp/mybaseline</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/profile]æä»¶åå®¹" id="linux-obj-1029">
+   <filepath>/tmp/mybaseline</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/ftpaccess]æä»¶" id="linux-obj-1033">
+   <filepath>/etc/ftpaccess</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/vsftpd/ftpusers]æä»¶" id="linux-obj-1034">
+   <filepath>/etc/vsftpd/ftpusers</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/ftpusers]æä»¶" id="linux-obj-1035">
+   <filepath>/etc/ftpusers</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/vsftpd.ftpusers]æä»¶" id="linux-obj-1036">
+   <filepath>/etc/ftpusers</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/pam.d/vsftpd]æä»¶" id="linux-obj-1037">
+   <filepath>/etc/pam.d/vsftpd</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/vsftpd.conf]æä»¶" id="linux-obj-1038">
+   <filepath>/etc/vsftpd.conf</filepath>
+  </filecontentObject>
+  <filecontentObject desc="è·å[/etc/vsftpd/vsftpd.conf]æä»¶" id="linux-obj-1039">
+   <filepath>/etc/vsftpd/vsftpd.conf</filepath>
+  </filecontentObject>
+ </objects>
+</root>

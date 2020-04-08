@@ -1,0 +1,55 @@
+PASS_MAX_DAYS 2
+auth required pam_wheel.so group=wheel
+auth sufficient pam_rootok.so
+PASS_MIN_LEN 10
+password  requisite pam_cracklib.so retry=3  difok=3 minlen=10 ucredit=-1 lcredit=-3 dcredit=-3 dictpath=/usr/share/cracklib/pw_dict.pwd
+export TMOUT=100
+PermitRootLogin no
+umask=027
+umask 027
+authpriv.*  /var/log/secure
+auth,authpriv.*         /var/log/secure
+*.*;auth,authpriv.none      -/var/log/secure
+cron.*             /var/log/cron.log
+*.* @@remote-host:514
+error_page 400 /tmp/mybaseline
+error_page 404 /tmp/mybaseline
+error_page 413 /tmp/mybaseline
+error_page 502 /tmp/mybaseline
+error_page 504 /tmp/mybaseline
+server_tokens off
+server_tokens off;
+error_log  /tmp/mybaseline  debug
+access_log /tmp/mybaseline
+limit_conn perip 2;
+limit_conn perserver 20;
+limit_rate 100k;
+limit_conn true;
+limit_rate true;
+client_body_timeout 5;
+client_header_timeout 5;
+keepalive_timeout 5;
+send_timeout 5;
+$ModLoad imtcp
+$InputTCPServerRun 514
+$WorkDirectory /var/lib/rsyslog
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+$template Remote,"/var/log/%$YEAR%-%$MONTH%-%$DAY%/%fromhost-ip%.log"
+:fromhost-ip, !isequal, "127.0.0.1" ?Remote
+$ActionFileEnableSync on
+$IncludeConfig /etc/rsyslog.d/*.conf
+$OmitLocalLogging on
+$IMJournalStateFile imjournal.state
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+authpriv.*                                              /var/log/secure
+mail.*                                                  -/var/log/maillog
+cron.*                                                  /var/log/cron
+*.emerg                                                 :omusrmsg:*
+uucp,news.crit                                          /var/log/spooler
+local7.*                                                /var/log/boot.log
+$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+$ActionQueueType LinkedList   # run asynchronously
+$ActionResumeRetryCount -1    # infinite retries if host is down
+*.* @@remote-host:514
