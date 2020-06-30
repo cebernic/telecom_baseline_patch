@@ -1,5 +1,5 @@
 "# SzyBaseline Patch" 
-- ¸²¸Ç jt-os-linux.xml µ½ /usr/local/sa-agent/conf
-- ¸²¸Ç jt-mw-nginx.xml µ½ /usr/local/sa-agent/conf
-- ¸²¸Ç mybaseline µ½ /tmp
-- cd /usr/local/sa/sa-agent/bin/ Ö´ÐÐ ./checkSafe.sh
+- è¦†ç›– jt-os-linux.xml åˆ° /usr/local/sa/sa-agent/conf
+- è¦†ç›– jt-mw-nginx.xml åˆ° /usr/local/sa/sa-agent/conf
+- è¦†ç›– mybaseline åˆ° /tmp
+- cd /usr/local/sa/sa-agent/bin/ æ‰§è¡Œ ./checkSafe.sh
